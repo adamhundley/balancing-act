@@ -1,0 +1,50 @@
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 75px;
+}
+
+.form-wrapper {
+  width: 50vw;
+}
+
+.message-row-wrapper {
+  margin: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.message-row-wrapper:nth-child(odd) {
+  background-color: rgba(43, 145, 153, 0.8);
+}
+
+.message-row-wrapper .info-row {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.message-row-wrapper .info-row .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-row-wrapper .info-row .btn-danger {
+  margin-left: 15px;
+}
+
+html,
+body {
+  background-color: #fff;
+  color: #636b6f;
+  font-family: "Nunito", sans-serif;
+  font-weight: 200;
+  height: 100vh;
+  margin: 0;
+}
+
