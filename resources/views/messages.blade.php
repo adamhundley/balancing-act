@@ -32,7 +32,7 @@
                             Submit Message
                         </button>
                     </div>
-                    <br /><br />
+                    <hr />
                     <section class="messages-container">
                     </section>
                 </form>
