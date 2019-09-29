@@ -25,20 +25,6 @@ $(document).ready(function() {
         $('.messages-container').prepend(element);
     };
 
-    // Function to load the messages stored in the database
-    const loadMessages = () => {
-        $.ajax({
-            type: "GET",
-            url: '/api/messages',
-            success: (messages) => {
-                for (var i = 0; i < messages.length; i++) {
-                    addMessage(messages[i]);
-                }
-            }
-        });
-    };
-
-    loadMessages();
 
     const messageAction = (type, url, data = {}, success = null) => {
         let token = $('input[name="_token"]').val();
@@ -56,6 +42,18 @@ $(document).ready(function() {
             success: success
         });
     }
+
+    // Function to load the messages stored in the database
+    const loadMessages = () => {
+        let success = (messages) => {
+            for (var i = 0; i < messages.length; i++) {
+                addMessage(messages[i]);
+            }
+        };
+        messageAction('GET', '/api/messages', {}, success);
+    };
+
+    loadMessages();
 
     // New message submission
     $('.submit-btn').on('click', function(e) {

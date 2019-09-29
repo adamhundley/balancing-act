@@ -19240,22 +19240,7 @@ $(document).ready(function () {
   var addMessage = function addMessage(message) {
     var element = "\n            <div class='message-row-wrapper'>\n                <div class='info-row'>\n                    <div class='info'>\n                        <span class='message-name'>".concat(message.name, "</span>\n                        <span class='create-at'>").concat(message.created_at, "</span>\n                    </div>\n                    <div class='buttons'>\n                        <button class='btn btn-warning message-edit' data-id='").concat(message.id, "'>Edit</button>\n                        <button class='btn btn-danger message-delete' data-id='").concat(message.id, "'>Delete</button>\n                    </div>\n                </div>\n                <div class='message-row'>\n                    <textarea rows=\"5\" class='form-control message' readonly>").concat(message.message, "</textarea>\n                </div>\n            </div>\n        ");
     $('.messages-container').prepend(element);
-  }; // Function to load the messages stored in the database
-
-
-  var loadMessages = function loadMessages() {
-    $.ajax({
-      type: "GET",
-      url: '/api/messages',
-      success: function success(messages) {
-        for (var i = 0; i < messages.length; i++) {
-          addMessage(messages[i]);
-        }
-      }
-    });
   };
-
-  loadMessages();
 
   var messageAction = function messageAction(type, url) {
     var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -19272,8 +19257,20 @@ $(document).ready(function () {
       data: data,
       success: success
     });
-  }; // New message submission
+  }; // Function to load the messages stored in the database
 
+
+  var loadMessages = function loadMessages() {
+    var success = function success(messages) {
+      for (var i = 0; i < messages.length; i++) {
+        addMessage(messages[i]);
+      }
+    };
+
+    messageAction('GET', '/api/messages', {}, success);
+  };
+
+  loadMessages(); // New message submission
 
   $('.submit-btn').on('click', function (e) {
     e.preventDefault();
